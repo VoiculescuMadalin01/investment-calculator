@@ -11,6 +11,7 @@ function App() {
         duration: 10,
     });
 
+    const inputIsVadlid = userInput.duration >= 1;
     const handleChange = (inputIdentifier, newValue) => {
         setUserInput((prevUserInput) => {
             return {
@@ -19,11 +20,17 @@ function App() {
             };
         });
     };
+
     return (
         <>
             <Header />
             <UserInput userInput={userInput} onInputChange={handleChange} />
-            <Results input={userInput} />
+            {!inputIsVadlid && (
+                <p className="center">
+                    Please enter a duration greater than 0.
+                </p>
+            )}
+            {inputIsVadlid && <Results input={userInput} />}
         </>
     );
 }
